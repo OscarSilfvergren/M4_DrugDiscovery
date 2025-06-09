@@ -4,7 +4,7 @@ FillBarWidth = 0.05;
 BarPlotVector =[-0.1,0.0,0.1];
  
 %% Glucose control
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % 
 % % Legend
 % hold on
@@ -17,7 +17,7 @@ BarPlotVector =[-0.1,0.0,0.1];
 % hold off
 % grid on
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 subplot(2,4,1)
 hold on
@@ -121,7 +121,7 @@ grid on
 %% Conditions
 
 % % legend
-%figure()
+%figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'ytick',0:4:12,'xtick',0:12:48,'FontSize', 20,'FontSmoothing','on','fontname','Arial')
 % plot(SimStudy6_Vehicle0.time-312,simBestG_Vehicle  ,'Color', color_orange,'LineWidth',4)
@@ -132,7 +132,7 @@ grid on
 % hold off
 % grid on
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 % Glucose control
 subplot(2,3,1)
 hold on

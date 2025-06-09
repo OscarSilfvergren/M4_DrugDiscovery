@@ -15,7 +15,7 @@ CostSize = 1./(CostIndex./max(CostIndex)).^13;
 %% LEGENDS
 
 % batch-batch variability legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % plot([0],[1],'LineStyle', 'n','Color', color_1, 'Marker','.','MarkerSize',30)
 % plot([0],[0],'LineStyle', 'n','Color', color_2, 'Marker','.','MarkerSize',30)
@@ -28,7 +28,7 @@ CostSize = 1./(CostIndex./max(CostIndex)).^13;
 
 
 %Human islets donor-donor variability legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'XTick',[0.1,1,10],'YTick',1:1:3,'YTickLabel',{'Exenatide ECmax','Exenatide EC50','Initial functionality'},'FontSize', 15,'FontSmoothing','on','fontname','Arial','XScale','log')
 % plot(0.000001,0.000001,'Color', color_3b, 'Marker','.','MarkerSize',30,'LineStyle', 'n')
@@ -46,7 +46,7 @@ CostSize = 1./(CostIndex./max(CostIndex)).^13;
 % grid on
 
 % %batch-batch variability legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % plot([1,1],[1,1],'Color', color_1,'LineWidth',24)
 % plot([1,1],[1,1],'Color', color_2,'LineWidth',24)
@@ -59,7 +59,7 @@ CostSize = 1./(CostIndex./max(CostIndex)).^13;
 
 
 % %Human islets donor-donor variability legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'XTick',[0.1,1,10],'YTick',1:1:3,'YTickLabel',{'Exenatide ECmax','Exenatide EC50','Initial functionality'},'FontSize', 15,'FontSmoothing','on','fontname','Arial','XScale','log')
 % plot([1,1],[1,1],'Color', color_3b,'LineWidth',24)
@@ -77,7 +77,7 @@ CostSize = 1./(CostIndex./max(CostIndex)).^13;
 % grid on
 
 % % Media legend human islets
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'XTick',[0.1,0.5,1,2,10],'YTick',1:1:11,'YTickLabel',yaxisLabels,'FontSize', 20,'FontSmoothing','on','fontname','Arial','XScale','log')
 % plot([1,1],[1,1],'Color', color_8,'LineWidth',24)
@@ -91,7 +91,7 @@ CostSize = 1./(CostIndex./max(CostIndex)).^13;
 % grid on
  
 % % Media legend EndoC
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'XTick',[0.1,0.5,1,2,10],'YTick',1:1:11,'YTickLabel',yaxisLabels,'FontSize', 20,'FontSmoothing','on','fontname','Arial','XScale','log')
 % plot([1,1],[1,1],'Color', color_9,'LineWidth',24)
@@ -105,7 +105,7 @@ CostSize = 1./(CostIndex./max(CostIndex)).^13;
 % grid on
 
 % % Media legend HepaRG
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % subplot(2,2,1)
 % hold on
 % set(gca,'XTick',[0.1,0.5,1,2,10],'YTick',1:1:11,'YTickLabel',yaxisLabels,'FontSize', 20,'FontSmoothing','on','fontname','Arial','XScale','log')
@@ -120,7 +120,7 @@ CostSize = 1./(CostIndex./max(CostIndex)).^13;
 % grid on
 
 % Insulin resistance: legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % set(gca,'ytick',0:5:25,'xtick',1:1:4,'XTickLabel',{'HC','LC','FCS','B27'},'FontSize', 20,'FontSmoothing','on','fontname','Arial')%,'YScale','log')
 % hold on
 % plot([0,1],[0,1],'Color', color_green,'LineWidth',4)
@@ -143,7 +143,7 @@ CostSize = 1./(CostIndex./max(CostIndex)).^13;
 % hold off
 
 % %human donor-donor legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'XTick',[0.1,1,10],'YTick',1:1:3,'YTickLabel',{'Exenatide ECmax','Exenatide EC50','Initial functionality'},'FontSize', 15,'FontSmoothing','on','fontname','Arial','XScale','log')
 % plot([0,1],[0,1],'Color', color_green,'LineWidth',6)
@@ -245,7 +245,7 @@ load('EC_Rat')      % RatEC100 is calc in script 'PlotGao'
 load('ECBest_Rat')  % RatEC100 is calc in script 'PlotGao'
      
 % Plot: Exenatide dose response
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 % Media
 subplot(2,3,1)
 hold on
@@ -386,7 +386,7 @@ IS16 = [BestHepaRG_ISHC(384), minHepaRG_ISHC(384), maxHepaRG_ISHC(384);
     BestHepaRG_ISFCS(384), minHepaRG_ISFCS(384), maxHepaRG_ISFCS(384);
     BestHepaRG_ISB27(384), minHepaRG_ISB27(384), maxHepaRG_ISB27(384)];
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 % HepaRG f
 subplot(3,3,1)
 set(gca,'ytick',0:5:25,'xtick',1:1:4,'XTickLabel',{'HC','LC','FCS','B27'},'FontSize', 20,'FontSmoothing','on','fontname','Arial')%,'YScale','log')
@@ -511,7 +511,7 @@ yaxisLabels = {'Insulin resistance development',
     'Volume stability',
     'Exenatide response',
     'Exenatide potency'};
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % Liver
 subplot(2,3,1)
@@ -625,7 +625,7 @@ hold off
 grid on
 
 %% Fig. 4B: donor and batch variability
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 load('ModelUncertainty_paramsFull')
 ModelUncertainty_paramsLOG = log(ModelUncertainty_params);
@@ -788,7 +788,7 @@ hold off
 grid on
 
 %% Fig. 5C ii
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 Filets0(:,:)   = ParameterIndex.Filets0(:,:)  .*ParameterIndex.InSphero_params(:,ismember(pNames,"Filets0"))    ./ParameterIndex.InSphero_params(1,ismember(pNames,"Filets0"));
 HepaRG_f0(:,:) = ParameterIndex.HepaRG_f0(:,:).*ParameterIndex.InSphero_params(:,ismember(pNames,"Fspheroids0"))./ParameterIndex.InSphero_params(1,ismember(pNames,"Fspheroids0"));
@@ -861,7 +861,7 @@ for j = 1:row
     end
 end
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % PancreticCells
 subplot(2,4,3)
@@ -912,7 +912,7 @@ grid on
 hold off
 
 %% Fig. 4D
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 Spheroidfactor = logspace(0,1,2);
 
@@ -1054,8 +1054,11 @@ ExenatideParamMatrix.ExenatideInsulinDecay50(2,2) = exp(mu -2*sigma) * Parameter
 ExenatideParamMatrix.ExenatideInsulinDecay50(2,3) = exp(mu +2*sigma) * ParameterIndex.InSphero_params(1,ismember(pNames,"ExenatideInsulinDecay50"));
 
 ExenatideParamMatrix.InVitroPDbest  = [mean(ExenatideParamMatrix.ExenatideInsulinMax(1:2,1)),mean(ExenatideParamMatrix.ExenatideInsulinDecayMax(1:2,1)), mean(ExenatideParamMatrix.ExenatideInsulin50(1:2,1)), mean(ExenatideParamMatrix.ExenatideInsulinDecay50(1:2,1)), mean(ExenatideParamMatrix.ExenatideInsulin_hill(1:2,1))];
+try
 ExenatideParamMatrix.InVitroPD      = combvec(mean(ExenatideParamMatrix.ExenatideInsulinMax(1:2,2:3)),mean(ExenatideParamMatrix.ExenatideInsulinDecayMax(1:2,2:3)), mean(ExenatideParamMatrix.ExenatideInsulin50(1:2,2:3)), mean(ExenatideParamMatrix.ExenatideInsulinDecay50(1:2,2:3)), mean(ExenatideParamMatrix.ExenatideInsulin_hill(1:2,2:3)))';
-
+catch error
+    disp('Deep learning toolbox is not installed')
+end
 %save(['ExenatideParamMatrix_population'],'ExenatideParamMatrix');
 
 %% Plot the exenatide pd above
@@ -1100,7 +1103,7 @@ for j = 1:3
         minEffectHuman  = min(minEffectHuman,NewEffectHuman);
 end
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 subplot(2,2,1)
 hold on
 set(gca,'xtick',[0.001,0.01,0.1],'ytick',0:3:9,'FontSize', 20,'FontSmoothing','on','fontname','Arial','XScale','log')

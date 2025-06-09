@@ -62,7 +62,7 @@ disp(' ')
 
 %% Legend
 
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'ytick',0:5:15,'xtick',[0,60,120,180,240,300],'FontSize', 20,'FontSmoothing','on','fontname','Arial')
 % [maxTemp,minTemp,timeTemp] = RemoveNegativeFromLog([1,5],[1,5],[1,5]);
@@ -129,7 +129,7 @@ for j = 1:length(ExenatideParamMatrix.Emax_matrix_Rat)
     
 end
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % Exenatide
 subplot(3,3,1)
@@ -196,7 +196,7 @@ grid on
 
 %% Fig. 8D
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 time         = round((420:1440:(30*7*60*24))/5,0);
 time(end)    = 60276;
 
@@ -253,7 +253,7 @@ hold off
 % The 4 alternatives are generated from changing the rat/human dose assumption, changing ForcedDietChange to either 1 or 0 and turning off exenatide administration
 
 % Weekly - Plasma glucose
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 subplot(3,4,1)
 hold on
 set(gca,'ytick',0:5:15,'xtick',0:10:30,'FontSize', 20,'FontSmoothing','on','fontname','Arial')
@@ -274,7 +274,7 @@ grid on
 hold off
 
 %% Fig. S2
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 subplot(2,2,1)
 hold on
@@ -297,7 +297,7 @@ hold off
 grid on
 
 %% Fig. S2C
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % Weekly - Plasma glucose
 subplot(3,3,1)
@@ -382,7 +382,7 @@ grid on
 hold off
 
 %% Fig. S2D
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 BarWidth     = 0.1;
 FillBarWidth = 0.12;
 

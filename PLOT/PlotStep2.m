@@ -36,7 +36,7 @@ for j = 1:row
 end
 
 %% Fig. 6B
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 TextSize = 20;
 
@@ -145,7 +145,7 @@ hold off
 grid on
 
 %% Fig. 6C
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 subplot(3,5,1)
 hold on
@@ -209,7 +209,7 @@ hold off
 grid on
 
 %% Fig. 6A - Rat
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % IV
 subplot(2,3,1)
@@ -287,7 +287,7 @@ grid on
 hold off
 
 % The infusion for the PD (Fig. 7A iii)
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 subplot(2,3,1)
 hold on
 set(gca,'xtick',-30:30:90,'ytick',[0.1,10,1000],'FontSize', 20,'FontSmoothing','on','fontname','Arial','YScale','log')
@@ -312,7 +312,7 @@ grid on
 hold off
 
 %% Fig. 6A (non-rats)
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % human cell study PK
 subplot(2,3,1)
@@ -435,7 +435,7 @@ fprintf('Best fit to human cell data: %.2f, Statistical Limit: %.2f (dgf = %i)',
 disp(' ')
 
 % Plot
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 subplot(2,1,1)
 hold on
 set(gca,'xtick',0:6:24,'ytick',[0.1,10,1000],'FontSize', TextSize,'FontSmoothing','on','fontname','Arial','YScale','log')

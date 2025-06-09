@@ -1,7 +1,7 @@
 %% Study1
 
 % % legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'ytick',0:4:12,'xtick',[0,2,4,6,8,10,12,14],'FontSize', 20,'FontSmoothing','on','fontname','Arial')
 % ylabel('Glucose (mM)')
@@ -14,7 +14,7 @@
 % legend('Islet donor 8 & Liver spheroid 1','FCS & LC','FCS & HC','B27 & LC','Islet donor 9 & Liver spheroid 2','Orientation','horizontal')
 % hold off
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 % Study1 Glucose
 subplot(2,4,1)
 hold on
@@ -143,7 +143,7 @@ grid on
 
 %% Exp 6.2
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % InSphero GSIS exenatide
 subplot(2,4,1)
@@ -204,7 +204,7 @@ hold off
 grid on
 
 %%
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % Insulin
 subplot(2,3,1)
@@ -344,7 +344,7 @@ grid on
 hold off
 
 %% Exp Edu
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 FillBarWidth = 0.07;
 
 % GSIS proliferation
@@ -404,7 +404,7 @@ grid on
 %%
 %% SimulateInsulinPhases
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 subplot(3,2,1)
 hold on
 set(gca,'ytick',0:20:90,'xtick',-120:15:120,'FontSize', 20,'FontSmoothing','on','fontname','Arial')
@@ -448,7 +448,7 @@ grid on
 %%
 load('InSpheroInsulinPhases_data')
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 subplot(2,2,1)
 hold on
 %title('Static GSIS')

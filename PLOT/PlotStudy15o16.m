@@ -1,8 +1,8 @@
 %% Study15 cell assays
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % % legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'ytick',0:4:12,'xtick',[0,2,4,6,8,10,12,14],'FontSize', 20,'FontSmoothing','on','fontname','Arial')
 % ylabel('Glucose (mM)')
@@ -79,7 +79,7 @@ grid on
 %% Study 16 Co-cultures
 
 % % legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'ytick',0:4:12,'xtick',[0,2,4,6,8,10,12,14],'FontSize', 20,'FontSmoothing','on','fontname','Arial')
 % ylabel('Glucose (mM)')
@@ -91,7 +91,7 @@ grid on
 % legend('Vehicle (HC+HG+FCS)','Exenatide 1 nM (HC+HG+FCS)','Control (LC+LG+FCS)','Linear regression','Orientation','horizontal')
 % hold off
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 % Study1 Glucose
 subplot(2,2,1)
 hold on

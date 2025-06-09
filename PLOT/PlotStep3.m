@@ -78,10 +78,10 @@ fprintf('Best fit to rat data: %.2f, Statistical Limit: %.2f (dgf = %i)', Cost_I
 disp(' ')
 
 %% Fig. 7A i-ii
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % % Legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'xtick',[-30,0,30,60,90],'ytick',[0,10,20,30,40],'FontSize', 20,'FontSmoothing','on','fontname','Arial')
 % plot(simRatpd_vehicle.time-30,BestGaoG_Vehicle/18,'Color', color_blue,'LineWidth',3)
@@ -231,7 +231,7 @@ grid on
 hold off
 
 %% Fig. 7A iii-v
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 FillBarWidth = 0.2;
 BarWidth     = 0.2;

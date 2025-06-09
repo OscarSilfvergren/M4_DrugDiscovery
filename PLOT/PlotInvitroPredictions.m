@@ -51,7 +51,7 @@ disp(' ')
 %% Fig. 5B i-ii
 
 % % legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'ytick',0:10:40,'xtick',0:2:6,'FontSize', 20,'FontSmoothing','on','fontname','Arial')
 % plot(simStudy9_control.time/24 -1, BestInsulin_Study9_control/1000 ,'Color', color_green   ,'LineWidth',4)
@@ -63,7 +63,7 @@ disp(' ')
 % hold off
 % grid on
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % Study9 chip
 subplot(2,2,1)
@@ -117,7 +117,7 @@ hold off
 grid on
 
 %% Fig. 5B iii
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % Static cell assay 1: 0 mM glucose
 subplot(3,3,1)
@@ -170,7 +170,7 @@ grid on
 %% Fig. 5C
 
 % % legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'ytick',0:4:12,'xtick',[0,2,4,6,8,10,12,14],'FontSize', 20,'FontSmoothing','on','fontname','Arial')
 % ylabel('Glucose (mM)')
@@ -182,7 +182,7 @@ grid on
 % legend('Calibration data','Validation data','FCS & LC','FCS & HC','Orientation','horizontal')
 % hold off
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 % Calibrated Glucose
 subplot(2,3,1)
 hold on
@@ -294,7 +294,7 @@ end
 %
 
 % Plot GER (Glucose & Exenatide response)
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 % colors and grid
 [X,Y]               = meshgrid(surfGlucose,surfExenatide);
 CO(1:length(surfExenatide),1:length(surfGlucose),1) = 0.4; % untrained
@@ -412,7 +412,7 @@ xlim([0,120])
 hold off
 
 % legend
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % fill(1,1,1,'FaceColor', color_blueBlindFriendly,'LineWidth',LineWidthValue)
 % fill(1,1,1,'FaceColor', color_red,'LineWidth',LineWidthValue)

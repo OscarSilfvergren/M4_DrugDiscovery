@@ -4,7 +4,7 @@ FillBarWidth = 0.05;
 BarPlotVector =[-0.1,0.0,0.1];
 
 % LEGEND
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'ytick',0:500:1500,'xtick',0:1:8,'Xticklabel',{'ULT D0','ULT D10','HC+BSA D7','NC+BSA D7','B27 D7','ULT D7','HC+FCS D10','NC+FCS D10','ULT D10'},'FontSize', TextSize,'FontSmoothing','on','fontname','Arial')
 % bar     (-1000,5,BarWidth,'FaceColor',color_blue,'LineWidth',1,'FaceAlpha',0.5)
@@ -158,7 +158,7 @@ load('BH5ref_data')
 %%
 
 % Glucose response
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 subplot(2,4,1)
 hold on
 set(gca,'xtick',[0,2.8,5.5,8,11.1,16.8,20.1],'ytick',0:0.25:1,'FontSize', 20,'FontSmoothing','on','fontname','Arial')
@@ -200,7 +200,7 @@ hold off
 grid on
 
 %%
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 % GSIS exenatide
 subplot(2,4,1)
@@ -245,7 +245,7 @@ grid on
 %% Exp 8.3
 
 % % LEGEND
-% figure()
+% figure('units','normalized','outerposition',[0 0 1 1])
 % hold on
 % set(gca,'ytick',0:500:1500,'xtick',0:1:8,'Xticklabel',{'ULT D0','ULT D10','HC+BSA D7','NC+BSA D7','B27 D7','ULT D7','HC+FCS D10','NC+FCS D10','ULT D10'},'FontSize', TextSize,'FontSmoothing','on','fontname','Arial')
 % plot(simExp8p3_Hcontrol.time/24, BestExp8p3_Insulin0/1000   ,'Color', color_green   ,'LineWidth',2)
@@ -257,7 +257,7 @@ grid on
 % hold off
 % grid on
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 
 subplot(2,3,1)
 hold on
@@ -422,7 +422,7 @@ xlim([-0.1 9.1])
 hold off
 grid on
 
-figure()
+figure('units','normalized','outerposition',[0 0 1 1])
 subplot(2,3,4)
 hold on
 set(gca,'xtick',[0,1,3,5,7,9],'ytick',[0.1,1,10],'FontSize', 20,'FontSmoothing','on','fontname','Arial','YScale','log')
