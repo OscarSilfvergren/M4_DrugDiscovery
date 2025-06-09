@@ -1,0 +1,206 @@
+********** MODEL NAME
+Module3
+
+********** MODEL NOTES
+
+********** MODEL STATES
+d/dt(Qsto1)           = (Meal_CarbohydratesFlow) - (Qsto1ToQsto2)
+d/dt(Qsto2)           = (Qsto1ToQsto2)           - (Qsto2ToQgut)
+d/dt(Qgut)            = (Qsto2ToQgut)            - (Qgut_out)
+d/dt(Intestines_Protein) = (Meal_ProteinFlow/BW)                      - (ProteinDigestion)
+d/dt(Intestines_aa)      = (ProteinDigestion)                         - (aaTransportation)
+
+d/dt(Gp) = (Ra + GtToGp)        - (U_ii + GpToGt)
+d/dt(Gt) = (GlucoseInjection + GpToGt + EGP)       - (U_idf + U_idm + GtToGp + U_il)
+d/dt(Gl)          = (U_il + Glycogenolysis + Gluconeogenesis)                    - (EGP_Liver + Glycogenesis + Glycolysis)
+d/dt(Gly_L)       = (Glycogenesis)                                               - (Glycogenolysis)
+d/dt(Pyruvate_L)  = (aaIntoPyruvate_Meal + Glycolysis + PyruvateTranslocase)  - ( PyruvateOxi_L)
+d/dt(CrebCycle_L) = (aaIntoCrebCyle_Meal + PyruvateOxi_L)                        - (Gluconeogenesis + CrebUsage)
+d/dt(Ipo) = (S_po)                - (S)
+d/dt(Il)  = (S + IpToIl)        - (IlToIp + InsulinDegradation_Liver)
+d/dt(Ip)  = (IlToIp)            - (IpToIl + InsulinDegradation_Blood)
+d/dt(InsulinStabilization)             = (alpha/180.16)*((beta*(Gp- IS*G_b))- InsulinStabilization)
+
+d/dt(GlucoseOverHealthy)        = (max(0,(G/18  - InsulinResistanceUpperlimit)))^2 - InsulinResistanceHealing*GlucoseOverHealthy
+d/dt(Aslow)       =                                                                         -KaSlow*Aslow/(KaSlow50+Aslow)     
+d/dt(A)       =                                                         -(Ka*A)/(Ka50+A) 
+d/dt(C1)      =     IVTransfusion/V1   +k21*C2*V2/V1  -k12*C1           +(Ka*A)/(Ka50+A)/V1 +(KaSlow*Aslow/(KaSlow50+Aslow))/V1   - k10 -degrad*C1
+d/dt(C2)      =                        -k21*C2        +k12*C1*V1/V2                                                               -degrad*C2
+
+Qsto1(0)     = 1e-50
+Gly_L(0)     = 1000
+
+********** MODEL PARAMETERS
+Ka      = 0.597078921312366 % Fixed from pre-clinical data
+Ka50    = 46.6507037824382 % Fixed from pre-clinical data
+Q_ref   = 0.00114445692877767 % Fixed from pre-clinical data
+V1_ref  = 0.0436985734374784 % Fixed from pre-clinical data
+V2_ref  = 0.0521237221275963 % Fixed from pre-clinical data
+CL_ref  = 1.54803988670125 % Fixed from pre-clinical data
+CL50    = 348.482255090484 % Fixed from pre-clinical data
+b_reaction   = 0.600000500867288 % Fixed from pre-clinical data
+b_volume     = 0.997471182625691 % Fixed from pre-clinical data
+degrad = 0.0004 % Fixed from pre-clinical data
+
+KaSlow      = 0.04                                  % calibrated to data because of slow delivery system
+KaSlow50    = 10000                                 % calibrated to data because of slow delivery system
+InsulinResistanceUpperlimit  = 12.9509318466891     % calibrated to data because estimation data lacks rate of insulin resistance regression
+InsulinResistanceHealing     = 3.49722513196455e-06 % calibrated to data because estimation data lacks rate of insulin resistance regression
+ISk                = 1.4e-06                        % fixed from calibration best agreement to data (row 1 of ModelUncertainty_Human)
+
+Vmax_ii = 9.67878688201184   % same mean of muscle and fat
+Vmax_id = 0.75               % same but: i) mean of muscle and fat, and ii) scaled to the initial IS (x5)
+U50     = 50.5743078119266   % same mean of muscle and fat
+U_ratio = 0.7
+EGP_KidneysK       = 0.761480995110005
+
+GLUT2_diffusionMax = 6.35672990776367
+GLUT2_diffusion0   = 1.72459793363864
+Uidl_diffusionMax  = 1.029782134299738
+Uidl_diffusion0    = 1.10648381403843
+
+ExenatideInsulinMax        = 3     % Overwritten from pre-clinical data
+ExenatideInsulin50         = 0.085 % Overwritten from pre-clinical data
+ExenatideInsulin_hill      = 3     % Overwritten from pre-clinical data
+ExenatideInsulinDecayMax   = 1     % Overwritten from pre-clinical data
+ExenatideInsulinDecay50    = 10    % Overwritten from pre-clinical data
+Exanitide_IP               = 0.8   % Fixed from pre-clinical data
+InsulinResponseMax         = 17    % Fixed from pre-clinical data
+InsulinResponse50          = 160   % Fixed from pre-clinical data
+InsulinResponse_hill       = 1     % Fixed from pre-clinical data
+
+k_gri = 52.9415994061694     % Same
+k_min = 0.000148950603624885 % Same
+k_max = 0.00663360171972480  % Same
+b     = 69.6886722495413     % Same
+d     = 0.0257099666859910   % Same
+k_abs = 0.0348191995779094   % Same
+ProteinBreakdown   = 0.00128504099976599  % Same
+aaTransportation_k = 2.67641999999523     % Same
+f     = 0.800000176366274                 % Same
+
+k_1   = 0.0460219179880963 % Same
+U_ii  = 0.766261649526384 % Same
+m_2   = 0.285627899999946 % Same
+m_4   = 0.00969491608226903 % Same
+K     = 179.958328862496 % Same
+S_b   = 3.07765154584360e-05 % Same
+gamma = 8273.37282915844 % Same
+
+k_2         = 0.910039937816065 % Same
+G_b         = 30.3364075076953 % Same
+V_glyBmax   = 1.18021448238202 % Same
+GlyB        = 1.75152492582083 % Same
+V_glySmax   = 1.67014287895493 % Same
+GlyS        = 1.98335948854724 % Same
+CrebUsage_K = 0.00164895599927419 % Same
+Gluconeogenesis_CrebK     = 0.485880000000000 % Same 
+PyruvateTranslocase_K     = 0.000385551308862550 % Same
+PyruvateOxi_k             = 0.00202327333333544 % Same
+Aminoprofile_k            = 0.949971801771205 % Same
+Glycolysis_k              = 0.362847030988974 % Same
+
+m_1 = 0.329098230001995 % Same
+m_5 = 1.03585337853596 % Same
+m_6 = 0.502018455732839 % Same
+alpha = 3.18129631836220 % Same
+beta  = 0.0184522669680327 % Same
+GlyDep_Meal            = 388.316622751153 % Same
+GlyDep_TCA             = 46.9919143026883 % Same
+GlyDep_Glugoneogenesis = 2657.88668680817 % Same
+GlyDep_KidneysEGP      = 0.0932333671168213 % Same
+GlyDepEXP_Meal            = 3.00000028693940 % Same
+GlyDepEXP_TCA             = 1.09999242939599 % Same
+GlyDepEXP_Glugoneogenesis = 0.100546303483149 % Same
+GlyDepEXP_KidneysEGP      = 0.134365727125936 % Same
+
+Meal_ProteinFlow        = 0                %Input: Protein mg/min
+Meal_CarbohydratesFlow  = 0                %Input: Carbohydrate mg/min
+GlucoseInjection        = 0                %Input: Carbohydrate mg/kg/min
+D                       = 0                %Input: Set to mg of last carbohydrate input
+BW             = 91              %Input: kg
+IVTransfusion  = 0               %Input: uMol/min
+********** MODEL VARIABLES
+PlasmaVolume = 0.02176 * (BW/0.34)^1.06
+LiverVolume  = PlasmaVolume*0.13
+V1           = V1_ref  * (BW/0.34)^b_volume
+V2           = V2_ref  * (BW/0.34)^b_volume
+CL           = CL_ref  * (BW/0.34)^b_reaction
+Q            = Q_ref   * (BW/0.34)^b_reaction 
+
+Glycogen_liver = Gly_L*BW/(LiverVolume*666.6)
+I              = Ip*(BW/(PlasmaVolume))
+G              = Gp*BW/(PlasmaVolume*10)
+
+GlyDep_Meal_p                  = (Glycogen_liver/GlyDep_Meal)^GlyDepEXP_Meal
+GlyDep_Meal_n                  = (GlyDep_Meal/Glycogen_liver)^GlyDepEXP_Meal
+GlyDep_TCA_p                   = (Glycogen_liver/GlyDep_TCA)^GlyDepEXP_TCA
+GlyDep_Gluconeogenesis_n       = (GlyDep_Glugoneogenesis/Glycogen_liver)^GlyDepEXP_Glugoneogenesis
+GlyDep_KidneysEGP_n            = (GlyDep_KidneysEGP/Glycogen_liver)^GlyDepEXP_KidneysEGP
+
+********** MODEL REACTIONS
+k12     = Q/V1
+k21     = Q/V2
+k10     = (CL*C1/(CL50+C1))/V1
+
+IS                 = 1 + ISk*GlucoseOverHealthy
+Exenatide_hill     = C1^ExenatideInsulin_hill
+Exanitide_PD       = ((ExenatideInsulinMax*Exenatide_hill/((ExenatideInsulin50^ExenatideInsulin_hill)+Exenatide_hill)) - (Exenatide_hill*ExenatideInsulinDecayMax/(Exenatide_hill+(ExenatideInsulinDecay50^ExenatideInsulin_hill))))
+Exanitide_IProc    = 1 + Exanitide_PD * (1-Exanitide_IP)
+Exanitide_IPbasal  = 1 + Exanitide_PD * Exanitide_IP
+InsulinResponseNew = 1 + (InsulinResponseMax * (I^InsulinResponse_hill)/((I^InsulinResponse_hill) + ((IS*InsulinResponse50)^InsulinResponse_hill)))
+
+Q_sto         = Qsto1 + Qsto2
+aa            = 5/2/(1-b)/D
+cc            = 5/2/d/D
+k_empt        = k_min+(k_max-k_min)/2 *(tanh(aa*(Q_sto-b*D))-tanh(cc*(Q_sto-d*D))+2)
+
+Qsto1ToQsto2     = k_gri*Qsto1
+Qsto2ToQgut      = k_empt*Qsto2
+Qgut_out         = k_abs*Qgut
+ProteinDigestion = ProteinBreakdown    * Intestines_Protein 
+aaIntoCrebCyle_Meal = (1-Aminoprofile_k)  * aaTransportation_k     * Intestines_aa    * GlyDep_Meal_n
+aaIntoPyruvate_Meal = Aminoprofile_k      * aaTransportation_k     * Intestines_aa    * GlyDep_Meal_n
+aaIntoLiver_Meal    = aaIntoPyruvate_Meal + aaIntoCrebCyle_Meal 
+aaIntoBody_Meal     = aaTransportation_k  * Intestines_aa          * GlyDep_Meal_p
+aaTransportation    = aaIntoLiver_Meal    + aaIntoBody_Meal
+
+Ra      = f*k_abs*Qgut/BW
+GtToGp  = k_2*Gt
+GpToGt  = k_1*Gp
+
+U_il        = (Uidl_diffusionMax*Gt)/(Uidl_diffusion0+Gt)
+EGP_Liver   = (GLUT2_diffusionMax*Gl)/(GLUT2_diffusion0+Gl)
+EGP_Kidneys = EGP_KidneysK * GlyDep_KidneysEGP_n
+EGP         = EGP_Liver + EGP_Kidneys
+
+Vmax_U     = Vmax_ii+(Vmax_id*I/IS)
+U_id       = Vmax_U*Gt/(IS*U50+Gt)
+U_idm      = U_id * (    U_ratio)
+U_idf      = U_id * (1 - U_ratio)
+U_ii_print = U_ii
+U          = U_il + U_idm + U_idf + U_ii_print
+
+Glycogenesis        = (V_glySmax*Gl)/(GlyS+Gl)*InsulinResponseNew
+Glycogenolysis      = (V_glyBmax*Gly_L)/(GlyB+Gly_L)
+Gluconeogenesis     = CrebCycle_L       * Gluconeogenesis_CrebK  * GlyDep_Gluconeogenesis_n
+Glycolysis          = Glycolysis_k      * Gl                     * InsulinResponseNew
+CrebUsage           = CrebCycle_L * CrebUsage_K  * GlyDep_TCA_p
+PyruvateOxi_L       = Pyruvate_L * PyruvateOxi_k
+PyruvateTranslocase = PyruvateTranslocase_K * GlyDep_KidneysEGP_n
+
+ChangeInGlucose       = (K/180.16)*((Ra + GtToGp) - (U_ii + GpToGt))
+S_po                  = max(0,Exanitide_IProc*ChangeInGlucose + Exanitide_IPbasal*InsulinStabilization + S_b)
+
+S      = gamma*Ipo
+IlToIp = m_1*Il
+IpToIl = m_2*Ip
+
+HE     = max(0,(-m_5*S)+m_6)
+m_3    = HE*m_1/(1-HE)
+InsulinDegradation_Liver = m_3*Il
+InsulinDegradation_Blood = m_4*Ip
+
+********** MODEL FUNCTIONS
+********** MODEL EVENTS
+********** MODEL MATLAB FUNCTIONS
