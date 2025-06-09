@@ -1,0 +1,142 @@
+********** MODEL NAME
+Module1
+
+********** MODEL NOTES
+
+********** MODEL STATES
+
+d/dt(Glucose_islets)   = GlucoseMediumToIslets*(V_m_medium/V_islets)                                 - (GlucoseIsletsToMedium)
+d/dt(Glucose_Medium)   = GlucoseIsletsToMedium*(V_islets/V_m_medium) + EGP*(V_hep/V_m_medium)        - (Uil + GlucoseMediumToIslets)
+d/dt(Insulin_islets)   = IP*(1/V_islets)                                                             - (F_islets*S/V_islets)
+d/dt(Insulin_Medium)   = F_islets *S*(V_islets/V_m_medium)/V_islets        - InsulinClearanceLiver
+d/dt(Exenatide_Medium) =                                                                             - ExenatideDegradiation
+
+d/dt(Glucose_spheroids) =     Uil*(V_m_medium/V_hep) + (0.5*LactateU*(V_m_medium/V_hep))          - (EGP + LactateProduction + Gout)
+d/dt(Lactate_Medium)    =     2*LactateProduction*(V_hep/V_m_medium)                             - (LactateU)
+
+d/dt(GlucoseOverHealthy)        = max(0,(Glucose_spheroids  - InsulinResistanceUpperlimit))
+d/dt(TimeState)                 = 1
+
+d/dt(IP_gdROC_delay) = IP_gdROC_delayK*(IP_gdROC - IP_gdROC_delay)
+
+d/dt(PancreticCells)     = F_islets *((1-EdU_boolean)*GrowthRate - DeathRate)
+d/dt(PancreticCells_EdU) = F_islets *(EdU_boolean    *GrowthRate - DeathRateEdU)
+
+PancreticCells(0)        = 20000
+PancreticCells_EdU(0)    = 0                                                                                                                                                                                                                                                                                                                 
+********** MODEL PARAMETERS  
+ISk                               = 1.93832264043675e-05
+IS0                               = 2.60230963787097
+InsulinResistanceUpperlimit       = 10.4959728559441
+InsulinResistanceTimeDependency   = 0.00375875411139974
+Fspheroids50                    = 163.197643157630
+Fspheroids0                     = 1
+Fspheroids_hill                 = 5.61712408127846
+InsulinResponseMax              = 6.50075256239270
+InsulinResponseLactateK         = 0.2
+InsulinResponse50                = 2952.85516764960
+InsulinResponse_hill            = 2.09309857800177
+Uil_iiK                         = 3.89543292317232e-07
+InsulinClearanceLiverK          = 8.89845361268689e-09
+LactateProductionK              = 3.26128282130496e-09
+GoutK                           = 0.228830208135269
+LactateUk                       = 2.61062222744381e-09
+AllometricLiverScalingK         = 0.629179217383147
+AllometricScalingK              = 0.629179217383147
+Fislets50                       = 702.484044772530
+Filets0                         = 1
+Filets_hill                     = 4.52205497801971
+d0                              = 0.000659583303513767
+r1                              = 0.000185937907990801
+r2                              = 5.43265321145873e-05
+kv                              = 4.38703513341206e-05
+GlucoseIsletsMediumDiffusion                      = 5.42067156279688e-10
+ExenatideDegradiationK                            = 1.33810951684906e-05
+ExenatideInsulinMax                               = 0.473890289690016
+Exanitide_IP                                      = 0.95
+ExenatideInsulin50                                = 1.17109710150246
+ExenatideInsulin_hill                             = 2.15702275401324
+ExenatideInsulinDecayMax                          = 0.269095049637073
+ExenatideInsulinDecay50                           = 3.83716296755962
+Exanitide_StabilisationMax                        = 0.01
+Exanitide_StabilisationEC50                       = 5
+IP_basalK                           = 5.82335696457021e-06
+IP_gdROCk                           = 4.37430890739511e-06
+IP_gdROC_delayK                     = 64.9561544632873
+IP_gdBaselineMax                      = 0.000179296553615954
+IP_BaselineK                          = 3.40926654515378
+IP_gdBaseline50                       = 4.36891545905771
+IP_gdBaselineHill                     = 2.68855506501581
+S_max  = 80872.4728526133
+S50    = 2215401972.48930
+CountLiver                                        =   1000000             %amount,  Experiment
+V_m_medium                                        =   0.0003               %L
+EdU_boolean = 0
+********** MODEL VARIABLES 
+SumPancreticCells = PancreticCells + PancreticCells_EdU
+V_hep      = 3.4e-11 * CountLiver       % total hepacyte volume (L)
+V_islets   = 4.4e-13 * SumPancreticCells   % total pancreas volume (L)
+
+% Amount of substance
+Glucose_Medium_mol    = Glucose_Medium   * V_m_medium      % mmol
+Insulin_Medium_mol    = Insulin_Medium   * V_m_medium      % pmol
+Insulin_islets_mol    = Insulin_islets   * V_islets        % pmol
+Glucose_islets_mol    = Glucose_islets   * V_islets        % mmol
+Exenatide_Medium_mol  = Exenatide_Medium * V_m_medium      % nmol
+
+Glucose_Spheroids_mol = Glucose_spheroids   * V_hep        % mmol
+Lactate_Medium_mol    = Lactate_Medium      * V_m_medium   % mmol
+
+% Allometric scaling
+Liver                        = gt(CountLiver,1)
+AllometricLiverScaling       = (CountLiver/1000000)^AllometricLiverScalingK %Function normalised from the standard 1000000 cells
+Pancreas                     = gt(SumPancreticCells,1)
+AllometricPancreasScaling    = (SumPancreticCells/2000)^AllometricScalingK %Function normalised from 2000 cells
+
+% Disease progression variables
+GlucoseIR = ISk*GlucoseOverHealthy 
+TimeIR    = ISk*InsulinResistanceTimeDependency*TimeState           % 8) Insulin sensitivity
+IS                 = IS0 + GlucoseIR + TimeIR
+F_islets           = Pancreas*AllometricPancreasScaling*(Filets0     - (Filets0    *TimeState^Filets_hill    /(Fislets50^Filets_hill + TimeState^Filets_hill)))         % 14) In vitro functionality of the pancretic spheroids
+F_spheroids        = Liver*AllometricLiverScaling*(Fspheroids0 - (Fspheroids0*TimeState^Fspheroids_hill/(Fspheroids50^Fspheroids_hill + TimeState^Fspheroids_hill)))     % 15) In vitro functionality of the hepatic spheroids
+InsulinResponse           = (InsulinResponseMax * (Insulin_Medium^InsulinResponse_hill)/((Insulin_Medium^InsulinResponse_hill) + ((IS*InsulinResponse50)^InsulinResponse_hill)))
+InsulinResponseLactate    = 1 + (InsulinResponse * InsulinResponseLactateK)
+InsulinResponseGout       = 1 + (InsulinResponse *(1-InsulinResponseLactateK))
+
+% Pharmacology
+ExenatideDegradiation        = ExenatideDegradiationK*Exenatide_Medium
+Exenatide_hill               = Exenatide_Medium^ExenatideInsulin_hill
+Exanitide_PD    = ((ExenatideInsulinMax*Exenatide_hill/((ExenatideInsulin50^ExenatideInsulin_hill)+Exenatide_hill)) - (Exenatide_hill*ExenatideInsulinDecayMax/(Exenatide_hill+(ExenatideInsulinDecay50^ExenatideInsulin_hill))))
+Exanitide_S       = 1 + Exanitide_PD
+Exanitide_IProc   = 1 + Exanitide_PD * (1-Exanitide_IP)
+Exanitide_IPbasal = 1 + Exanitide_PD * Exanitide_IP
+Exanitide_Stabilisation = 1 + (Exanitide_StabilisationMax * Exenatide_Medium/(Exenatide_Medium + Exanitide_StabilisationEC50))
+
+% Hepatic metabolism        
+Uil                           = F_spheroids * Glucose_Medium    * Uil_iiK                                     * 1/V_m_medium
+EGP                           = F_spheroids * Glucose_spheroids * Uil_iiK                                     * 1/V_hep
+LactateProduction             = F_spheroids * Glucose_spheroids * InsulinResponseLactate * LactateProductionK * 1/V_hep
+Gout                          = F_spheroids * Glucose_spheroids * InsulinResponseGout    * GoutK              * 1/V_hep
+LactateU                      = F_spheroids * Lactate_Medium    * LactateUk                                   * 1/V_m_medium
+InsulinClearanceLiver         = F_spheroids * Insulin_Medium    * InsulinClearanceLiverK                      * 1/V_m_medium                                                                     
+
+% Pancretic metabolism
+GlucoseMediumToIslets       = F_islets * GlucoseIsletsMediumDiffusion * Glucose_Medium/V_m_medium
+GlucoseIsletsToMedium       = F_islets * GlucoseIsletsMediumDiffusion * Glucose_islets/V_islets
+
+GlucoseROC    = max(0,GlucoseMediumToIslets*(V_m_medium/V_islets) - GlucoseIsletsToMedium)
+IP_gdROC      = F_islets   * (IP_gdROCk        * GlucoseROC)     * Exanitide_IProc
+IP_Baseline   = max(0,Glucose_islets - IP_BaselineK)
+IP_gdBaseline = F_islets   * ((IP_gdBaselineMax * IP_Baseline^IP_gdBaselineHill)/(IP_Baseline^IP_gdBaselineHill + IP_gdBaseline50^IP_gdBaselineHill)) * Exanitide_IPbasal
+IP_basal      = F_islets   * (IP_basalK)
+PositiveIP_gdROC_delay =  max(0,IP_gdROC_delay)
+IP            = IP_basal + PositiveIP_gdROC_delay + IP_gdBaseline
+
+S             = (Exanitide_S * S_max*Insulin_islets)/(Insulin_islets + S50)
+
+GrowthRate    = kv * Exanitide_Stabilisation *(SumPancreticCells/2000)^AllometricScalingK     *r1*Glucose_islets
+DeathRate     = kv                           *(PancreticCells/2000)^AllometricScalingK     *(d0 + (r2*Glucose_islets)^2)
+DeathRateEdU  = kv                           *(PancreticCells_EdU/2000)^AllometricScalingK *(d0 + (r2*Glucose_islets)^2)
+********** MODEL REACTIONS
+********** MODEL EVENTS
+********** MODEL MATLAB FUNCTIONS
